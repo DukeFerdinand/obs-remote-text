@@ -10,14 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model AccessToken {
-  id          String @id @default(uuid())
-  name        String @unique
-  accessToken String @default(cuid())
+model Account {
+  id String @id @default(uuid())
+  twitchId String @unique
+  username String @unique
+
+  layouts ObsLayout[] 
 }
 
 model ObsLayout {
   id      String  @id @default(uuid())
   content String
   css     String?
+
+  accountId String
+  account Account @relation(fields: [accountId], references: [id])
 }
