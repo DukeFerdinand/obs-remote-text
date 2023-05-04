@@ -1,4 +1,4 @@
-import { createJWT } from "@/lib/jwt";
+import { COOKIE_NAME, createJWT } from "@/lib/jwt";
 import { TwitchAccesstokenResponse } from "@/lib/types";
 import Cookies from "cookies";
 import { NextApiHandler } from "next";
@@ -34,7 +34,7 @@ const handler: NextApiHandler = async (req, res) => {
 
   const _24hours = 24 * 60 * 60 * 1_000; // 24 hours * 60 minutes * 60 seconds * 1,000 ms
 
-  cookies.set("ort-token", accessJwt, {
+  cookies.set(COOKIE_NAME, accessJwt, {
     httpOnly: true,
     expires: new Date(
       new Date().getTime() + twitchResponse.expires_in + _24hours
